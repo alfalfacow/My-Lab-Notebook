@@ -153,7 +153,7 @@ SpatialFeaturePlot(SeuratObject_subset, features="name_of_gene_score", pt.size.f
 ## Step 4: Cell clustering and manual cell type annotations 
 Gene expression visualization is cool and all, but we want more information! We may know the tissue type (head and neck, lung, breast, etc) of our dataset/sample, but one major goal of spatial transcriptomics analyses is to quantify cell-cell communication. We want to know whether each spot is an immune cell (T cells, B cells, macrophages, etc), stromal cell (fibroblast), or epithelial cancer cell! To do this, we perform dimension reduction and clustering of our data.
 
-## 4.1: Dimension Reduction and Clustering
+### 4.1: Dimension Reduction and Clustering
 The following code is from the typical Seurat workflow for ST analyses. I will try and add an explanation for the math behind it later, but for now this code will be functional for our purposes. If you are curious I recommend googling some resources to learn more about PCA/UMAP techniques! 
 
 The end result/goal of cell clustering is a UMAP plot, which clusters similar cells onto 2 axes based on gene expression.
@@ -182,7 +182,7 @@ The second figure from the SpatialDimPlot allows us to see how neigboring cells 
 
 Now we are ready to assign cel type to each cluster!
 
-## 4.2: Finding gene markers for each population
+### 4.2: Finding gene markers for each population
 Seurat has a built in function called "FindMarkers", which allows us to quantify the genes that are most upregulated or downregulated in a specific cluster number, compared to all other clusters. FindMarkers creates a dataframe with information on the genes that are markers, logFC values (quantifying how upregulated/downregulated that marker is compared to other clusters), and p-values.
 
 ```
@@ -197,7 +197,7 @@ VlnPlot(SeuratObject_subset, features = c("gene1", "gene2", "gene3"))
 
 ```
 
-## 4.3: Manually annotating cell type
+### 4.3: Manually annotating cell type
 We clustered our cells into similar populations (yay!), but now we have to decide the specific cell type that each cluster represents. One way to do this is to individually look at the strongest markers that were identified, using these markers to guide our manual labeling of each cell type. For example, CD3, CD4 and CD8 are well-established T cell markers, according to this (resource)[https://www.antibodies.com/primary-antibodies/cell-markers/immune-cell-markers]. There are also automatic computational methods to assign cell types based on a reference dataset, but results are highly variable.
 
 The manual annotation is very subjective and prone to error, but it allows for more control and is informed by known markers. No single technique for annotation is perfect, and unfortunately cell type annotation is one of the more "unstable" aspects of ST analyses.
@@ -219,6 +219,7 @@ SeuratObject_subset <- RenameIdents(SeuratObject_subset,
 SeuratObject_subset[["cell_types"]] <- Idents(SeuratObject_subset) #creates new meta.data column for cell types
 DimPlot(SeuratObject_subset, group.by = "cell_types", raster=FALSE, label=FALSE, cols=my_colors)
 ```
+## Conclusion
 Congratulations! With the cell types labeled, there are many other computational tools and packages that will allow for downstream analyses.
 
 After following this workflow, you have successfully:
@@ -238,3 +239,4 @@ Feel free to reach out of any of the code does not work as intended! I have also
 (Seurat "Integration Tutorial")[https://satijalab.org/seurat/archive/v3.0/immune_alignment.html]
 (Seurat "Merge Tutorial")[https://satijalab.org/seurat/archive/v4.3/merge]
 (Seurat "Reciprocal PCA Integration")[https://satijalab.org/seurat/articles/integration_rpca.html]
+
