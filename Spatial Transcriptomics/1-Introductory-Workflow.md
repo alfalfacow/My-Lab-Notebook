@@ -191,7 +191,7 @@ Seurat has a built in function called "FindMarkers", which allows us to quantify
 clusterN_markers <- FindMarkers(SeuratObject_subset, ident.1 = N, min.pct = 0.25)
 head(clusterN_markers, n = 5) #view the first 5 rows of the dataframe
 
-#Visualize expression of a gene in each cluster to verify up/downregulation. After custering, this plot will automatically split the violin plot, with one plot for each cluster, all shown side by side
+#Visualize expression of a gene in each cluster to verify up/downregulation. After clustering, this plot will automatically split the violin plot, with one plot for each cluster, all shown side by side
 
 VlnPlot(SeuratObject_subset, features = c("gene1", "gene2", "gene3"))
 
@@ -223,9 +223,9 @@ DimPlot(SeuratObject_subset, group.by = "cell_types", raster=FALSE, label=FALSE,
 Congratulations! With the cell types labeled, there are many other computational tools and packages that will allow for downstream analyses.
 
 After following this workflow, you have successfully:
-  Input and preprocessed your spatial transcriptomics dataset as a Seurat object
-  Visualized gene expression and gene signatures on the tissue
-  Clustered and manually defined cell type populations on the tissue
+* Input and preprocessed your spatial transcriptomics dataset as a Seurat object
+* Visualized gene expression and gene signatures on the tissue
+* Clustered and manually defined cell type populations on the tissue
 
 Feel free to reach out of any of the code does not work as intended! I have also linked some references I used below :)
 
@@ -233,6 +233,7 @@ Feel free to reach out of any of the code does not work as intended! I have also
 * [Seurat ST Vignette](https://satijalab.org/seurat/articles/spatial_vignette)
 * [Seurat Command List](https://satijalab.org/seurat/articles/essential_commands.html#seurat-standard-worflow)
 * [Preprocessing/QC and Normalization](https://yu-tong-wang.github.io/talk/sc_st_data_analysis_R.html#quality-contro)
+
 
 
 
