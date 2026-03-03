@@ -6,7 +6,7 @@ The two main types of ST are imaging based (quantifies gene expression for selec
 These instructions are a compilation of the common workflow for dealing with sequencing based ST (of the Visium 10x plaform) through the Seurat package in R.
 
 ## Step 1: Data Entry
-First, you will need to obtain a spatial transcriptomics dataset, either from a publically accessible dataset or one you generated yourself. These instructions will be using the [GSE281978](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE281978) series from the Gene Expression Omnibus (GEO) for Head and Neck Cancer (HNSC). The dataset can be downloaded as a tar file at the bottom of the page.
+First, you will need to obtain a spatial transcriptomics dataset, either from a publically accessible dataset or one you generated yourself. An example is the [GSE281978](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE281978) series from the Gene Expression Omnibus (GEO) for Head and Neck Cancer (HNSC). The dataset can be downloaded as a tar file at the bottom of the page.
 
 To read the dataset into Seurat as a Seurat object, the files for each ONE specific sample need to be organized in a very specific structure in order for Seurat to be able to recognize it:
 
@@ -234,6 +234,7 @@ Feel free to reach out of any of the code does not work as intended! I have also
 *[Seurat Command List](https://satijalab.org/seurat/articles/essential_commands.html#seurat-standard-worflow)
 *[JEFWorks Lab integration](https://jef.works/blog/2025/04/22/harmony-with-sketching-in-seurat/)
 *[Preprocessing/QC and Normalization](https://yu-tong-wang.github.io/talk/sc_st_data_analysis_R.html#quality-contro)
+
 
 
 
