@@ -237,6 +237,9 @@ Feel free to reach out of any of the code does not work as intended! I have also
 ## Food For Thought
 * [Biologists, stop putting UMAP plots in your papers](https://simplystatistics.org/posts/2024-12-23-biologists-stop-including-umap-plots-in-your-papers/)
 * [Basic explanation of PCA, t-SNE, UMAP](https://bioconductor.org/books/3.15/OSCA.basic/dimensionality-reduction.html)
+* [More on dimensional reduction](https://biostatsquid.com/pca-umap-tsne-comparison/#:~:text=Final%20notes,the%20data%20are%20primarily%20linear.)
+* [More on dimensional reduction 2](https://carnotresearch.medium.com/understanding-dimensionality-reduction-pca-vs-t-sne-vs-umap-vs-fit-sne-vs-largevis-vs-laplacian-13d0be9ef7f4)
+
 
 
 
