@@ -155,11 +155,11 @@ merged_object_subset <- FindNeighbors(merged_object_subset, reduction = "harmony
 merged_object_subset <- FindClusters(merged_object_subset, resolution = 0.5, cluster.name = "seurat_cluster.harmony.SCT")
 merged_object_subset <- RunUMAP(PNI, reduction = "harmony.SCT", reduction.name = "umap.harmony.SCT", dims = 1:15) #notice that the harmony.SCT reduction is used here. The new reduction name for the UMAP labels has been named umap.harmony.SCT
 
-#Display UMAP plot again, after changing labelling of cells by dataset (which we had defined earlier to be the sample name)
 #Toggle between labels
 Idents(merged_object_subset) <- "dataset"
 Idents(merged_object_subset) <- "seurat_cluster.harmony.SCT" #new cluster anme from second run of FindClusters
 
+#Display UMAP plot again, after changing labelling of cells by dataset (which we had defined earlier to be the sample name)
 DimPlot(UMAP, reduction = "umap.SCT", label = TRUE)
 ```
 
