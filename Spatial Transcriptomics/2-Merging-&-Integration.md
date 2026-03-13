@@ -14,6 +14,14 @@ We started some introductory data entry and analyses for a single visium spatial
 * 3.2: Oh No! 
 * 3.3: Integration and Batch Effects Correction via Harmony
 
+4: Optional Visualizations
+* to be added soon
+* Troubleshooting low/hires images
+
+5: Finding markers
+* to be added soon
+* Troubleshooting FindMarkers for merged datasets
+
 # Step 1: Data Entry and merging
 ## 1.1: Data Entry
 First step: load all necessary libraries!
