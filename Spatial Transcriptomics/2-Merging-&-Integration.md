@@ -36,6 +36,8 @@ library(tidyverse)
 library(glmGamPoi) #this is a newer package that allows for faster SCTransform
 library(harmony) #this is the package that will allow us to perform integration and batch corrections
 library(UCell) #this is an additional tool for calculating gene signature scores; more on this later
+
+set.seed(123) #good practice for reproducibility
 ```
 
 The data entry process is the exact same process as before, except we repeat the process for each sample we want to merge:
