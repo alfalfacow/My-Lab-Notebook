@@ -12,7 +12,7 @@ We started some introductory data entry and analyses for a single visium spatial
 3: Cell Clustering and integration
 * 3.1: Dimension Reduction and Clustering
 * 3.2: Oh No! 
-* 3.3: Integration
+* 3.3: Integration and Batch Effects Correction via Harmony
 
 # Step 1: Data Entry and merging
 ## 1.1: Data Entry
@@ -109,11 +109,49 @@ To see the effect of batch effects, we can display the UMAP plot, with the spots
 ```
 #Use the Idents() function to change the main "identity" label of the cells, and thus the labels on the UMAP
 Idents(merged_object_subset) <- "dataset" #sets default labeling on plots to be datasets, USE THIS FOR THIS STEP
-Idents(merged_object_subset) <- "seurat_cluster.SCT" #sets default labeling on plots to be the clusters, USE THIS TO REVERT BACK TO CLUSTERS
+Idents(merged_object_subset) <- "seurat_cluster.SCT" #sets default labeling on plots to be the clusters (from FindClusters), USE THIS TO REVERT BACK TO CLUSTERS
 
 #Display UMAP plot again, after changing labelling of cells by dataset (which we had defined earlier to be the sample name)
 DimPlot(PNI, reduction = "umap.SCT", label = TRUE)
 ```
 
-The resulting UMAP plot should have a major problem: the cells seem to be clustered together based on dataset type! Here is an example:
+The resulting UMAP plot should have a major problem: the cells seem to be clustered together based on dataset type! This is indicative of batch effects. Here is an example:
 ![Alt text](https://raw.githubusercontent.com/alfalfacow/Spatial-Transcriptomics/main/Images/bad-umap.png)
+
+To fix this, we can apply the Harmony package to correct for batch effects. The end goal is for the UMAP to show random scatter of ALL the datasets throughout the entire plot, so that there is no clustering based on dataset/sample number.
+
+## 3.3: Integration and Batch Effects Corrections via Harmony
+Here is the code for running Harmony:
+```
+merged_object_subset <- RunHarmony(
+  object = merged_object_subset,
+  group.by.vars = "dataset",      
+  assay.use = "SCT",
+  reduction = "pca.SCT",
+  reduction.save = "harmony.SCT",
+  theta = 8
+)
+#group.by.vars tells us the variable (dataset) for which we want to correct for batch effects/integrate
+#recall that running SCTransform creates a new assay type called SCT (the original assay is called "Spatial". We specify Harmony to use the SCT assay using the assay.use parameter
+#reduction tells Harmony to use the PCA that we already ran above (see 3.2). We had named it pca.SCT so that is what we put here
+#according to the documentation, theta is a "Diversity clustering penalty parameter", and "larger values of theta result in more diverse clusters"
+```
+
+Essentially, the Harmony algorithm returns an updated Seurat object after integration and batch corrections. The corrected PCA reduction is saved under "harmony.SCT" (the arbitrary name we picked for the reduction.save parameter above).
+
+Now, with the corrected PCA reduction, we can apply the rest of the clustering algorithm!
+```
+merged_object_subset <- FindNeighbors(merged_object_subset, reduction = "harmony.SCT", dims = 1:15) #notice that the harmony.SCT reduction is used here
+merged_object_subset <- FindClusters(merged_object_subset, resolution = 0.5, cluster.name = "seurat_cluster.harmony.SCT")
+merged_object_subset <- RunUMAP(PNI, reduction = "harmony.SCT", reduction.name = "umap.harmony.SCT", dims = 1:15) #notice that the harmony.SCT reduction is used here. The new reduction name for the UMAP labels has been named umap.harmony.SCT
+
+#Display UMAP plot again, after changing labelling of cells by dataset (which we had defined earlier to be the sample name)
+#Toggle between labels
+Idents(merged_object_subset) <- "dataset"
+Idents(merged_object_subset) <- "seurat_cluster.harmony.SCT" #new cluster anme from second run of FindClusters
+
+DimPlot(UMAP, reduction = "umap.SCT", label = TRUE)
+```
+
+When displaying the new and improved UMAP with the dataset label, you should notice that all the datasets are randomly scattered all throughout the plot, with no noticeable clustering by dataset like before. In other words, the batch effects have been corrected, hooray! :)
+![Alt text](https://raw.githubusercontent.com/alfalfacow/Spatial-Transcriptomics/main/Images/harmony-umap.png)
