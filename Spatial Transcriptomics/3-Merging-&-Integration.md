@@ -57,6 +57,7 @@ object2$dataset <- "SampleName2" #assigning unique project name to each object
 The third line (object1$dataset) creates a new metadata column that tracks the dataset of each spatial transcriptomics spot so that it can be traced back to the original dataset during downstream analyses. 
 
 # Step 2: Quality Control and Preprocessing
+## 2.1: Quality Control and Preprocessing
 Now we proceed with quality control and normalization as we did before (See 1-Introductory-Workflow). According to several online posts ([here](https://github.com/satijalab/seurat/issues/7407) and [here](https://www.biostars.org/p/473165/)), it is best to perform quality control and preprocessing on individual samples before merging. I will try to work on a script to make this process more simple soon.
 
 ```
