@@ -3,11 +3,11 @@ We started some introductory data entry and analyses for a single visium spatial
 
 ## Table of Contents
 
-1: Data entry and merging
-* 1.1 Data Entry
-* 1.2 Merging
+1: Data entry
 
-2: Quality Control and Preprocessing
+2: Quality Control, Preprocessing, and merging
+* 2.1: Quality Control and Preprocessing
+* 2.2: Merging
 
 3: Cell Clustering and integration
 * 3.1: Dimension Reduction and Clustering
@@ -22,8 +22,7 @@ We started some introductory data entry and analyses for a single visium spatial
 * to be added soon
 * Troubleshooting FindMarkers for merged datasets
 
-# Step 1: Data Entry and merging
-## 1.1: Data Entry
+# Step 1: Data Entry
 First step: load all necessary libraries!
 ```
 #Same as before
